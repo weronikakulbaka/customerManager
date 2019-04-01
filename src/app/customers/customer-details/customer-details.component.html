@@ -1,0 +1,45 @@
+<div class="panel panel-default"  style="margin-top: 20px;">
+  <div class="panel-heading">
+    <h1 [style.color]="nameColor" [class.isActive]="!isActive">
+      <button type="button" (click)="left()">&lt;</button>
+      {{ customer.name | uppercase }}
+      <ng-container [ngSwitch]="customer.type">
+        <ng-container *ngSwitchCase="CustomerType.Standard">*</ng-container>
+        <ng-container *ngSwitchCase="CustomerType.Premium">**</ng-container>
+        <ng-container *ngSwitchCase="CustomerType.VIP">***</ng-container>
+        <ng-container *ngSwitchDefault>nieznany typ</ng-container>
+      </ng-container>
+      <button type="button" (click)="right()">&gt;</button>
+
+    </h1>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-8">
+        <p>{{customer.description}}</p>
+        <p appHighlight>Wiek: {{customer.age}}</p>
+        <p>Adres: {{customer.address.street }}, {{customer.address.houseNumber}}, {{customer.address.city}}</p>
+
+        <ul>
+          <li *ngFor="let category of customer.categories; let oddCategory = odd" [class.oddCategory]="oddCategory">{{ category | capitalize }}</li>
+        </ul>
+
+        <button class="btn btn-primary" (click)=" this.isActive = !this.isActive;" type="button">Przełącz podkreślenia</button>
+        <button class="btn btn-primary" (click)="changeColor()" type="button">Przełącz kolor</button>
+      </div>
+      <div class="col-sm-4">
+        <ng-container *ngIf="showPhoto; then photo else noPhoto"></ng-container>
+        <ng-template #photo>
+          <img [src]="customer.photoUrl" alt="default picture"/>
+        </ng-template>
+        <ng-template #noPhoto>
+          <p>Zdjęcie ukryte</p>
+        </ng-template>
+        <label><input type="checkbox" [(ngModel)]="showPhoto">Pokaż zdjęcie </label>
+        <div>
+          <p>{{ counter }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<div>

@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+    <div class="container-fluid">
+      <ul class="navbar-nav">
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="customers" class="nav-link" >Klienci</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a routerLink="customers/add" class="nav-link" >Dodaj klienta</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a routerLink="contracts" class="nav-link">Umowy</a>
+        </li>
+      </ul>
+      <form class="nav navbar-form navbar-right">
+        <button type="button" class="btn btn-default" (click)="authService.login()" *ngIf="!authService.isLogged" >Zaloguj</button>
+        <button type="button" class="btn btn-default" (click)="authService.logout()" *ngIf="authService.isLogged" >Wyloguj</button>
+      </form>
+    </div>
+  </nav>
